@@ -1,12 +1,9 @@
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
-    onAuthStateChanged 
+    signOut
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { auth } from './app.js';
-
-const loginScreen = document.getElementById('login-screen');
-const inventoryGrid = document.getElementById('inventory-grid');
 
 // Function to handle user sign-up
 async function signUp(email, password) {
@@ -15,6 +12,7 @@ async function signUp(email, password) {
         console.log('Signed up:', userCredential.user);
     } catch (error) {
         console.error('Sign-up error:', error);
+        alert(error.message);
     }
 }
 
@@ -25,20 +23,19 @@ async function signIn(email, password) {
         console.log('Signed in:', userCredential.user);
     } catch (error) {
         console.error('Sign-in error:', error);
+        alert(error.message);
     }
 }
 
-// Listen for authentication state changes
-onAuthStateChanged(auth, user => {
-    if (user) {
-        // User is signed in
-        loginScreen.classList.add('hidden');
-        inventoryGrid.classList.remove('hidden');
-    } else {
-        // User is signed out
-        loginScreen.classList.remove('hidden');
-        inventoryGrid.classList.add('hidden');
+// Function to handle user sign-out
+async function handleSignOut() {
+    try {
+        await signOut(auth);
+        console.log('Signed out');
+    } catch (error) {
+        console.error('Sign-out error:', error);
+        alert(error.message);
     }
-});
+}
 
-export { signUp, signIn };
+export { signUp, signIn, handleSignOut };

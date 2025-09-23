@@ -62,8 +62,8 @@
 
     <script type="module">
         import { auth } from './app.js';
-        import { signUp, signIn } from './auth.js';
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { signUp, signIn, handleSignOut } from './auth.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
         const sections = {
             'login-nav': 'login-screen',
@@ -114,7 +114,7 @@
         });
 
         signOutBtn.addEventListener('click', () => {
-            signOut(auth);
+            handleSignOut();
         });
 
         onAuthStateChanged(auth, user => {
