@@ -2,7 +2,12 @@ const CACHE_NAME = 'cash-and-carry-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/app.js'
+  '/app.js',
+  '/auth.js',
+  '/manifest.json',
+  '/images/icon-192x192.png',
+  '/images/icon-512x512.png',
+  'https://cdn.tailwindcss.com'
 ];
 
 self.addEventListener('install', event => {
